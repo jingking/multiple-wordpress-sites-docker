@@ -1,0 +1,18 @@
+version: '3'
+
+services:  
+  
+  certbot:
+     depends_on:
+       - webserver
+     #image: certbot/certbot #for amdx86
+     image: certbot/certbot:arm64v8-v1.29.0 #for arm64
+     container_name: certbot
+     volumes:
+       - ./certbot-etc:/etc/letsencrypt
+       - wordpress_domain1:/var/www/html/domain1
+       - wordpress_domain2:/var/www/html/domain2
+     command: >
+       certonly --email your@email.here --agree-tos --no-eff-email --force-renewal --webroot 
+       -w /var/www/html/domain1 -d domain1.com -d www.domain1.com 
+#      -w /var/www/html/domain2 -d domain2.com -d www.domain2.com 

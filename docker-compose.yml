@@ -1,0 +1,79 @@
+version: '3'
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: db
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      - MYSQL_DATABASE=wordpress
+    volumes: 
+#      - ./mysql_init:/docker-entrypoint-initdb.d
+      - dbdata:/var/lib/mysql
+    command: '--default-authentication-plugin=mysql_native_password'
+    networks:
+      - app-network
+
+  wordpress_domain1:
+    depends_on: 
+      - db
+    image: wordpress:6.0.1-fpm-alpine
+    container_name: wordpress_domain1
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      - WORDPRESS_DB_HOST=db:3306
+      - WORDPRESS_DB_USER=$MYSQL_USER
+      - WORDPRESS_DB_PASSWORD=$MYSQL_PASSWORD
+      - WORDPRESS_DB_NAME=wordpress
+      - WORDPRESS_TABLE_PREFIX=d1_
+    volumes:
+      - wordpress_domain1:/var/www/html/domain1 #this path must be the same as SCRIPT_FILENAME in the the nginx conf 
+    networks:
+      - app-network
+
+  wordpress_domain2:
+    depends_on: 
+      - db
+    image: wordpress:6.0.1-fpm-alpine
+    container_name: wordpress_domain2
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      - WORDPRESS_DB_HOST=db:3306
+      - WORDPRESS_DB_USER=$MYSQL_USER
+      - WORDPRESS_DB_PASSWORD=$MYSQL_PASSWORD
+      - WORDPRESS_DB_NAME=wordpress
+      - WORDPRESS_TABLE_PREFIX=d2_
+    volumes:
+      - wordpress_domain2:/var/www/html/domain2
+    networks:
+      - app-network
+
+  webserver:
+    depends_on:
+      - wordpress_domain2
+      - wordpress_domain1
+    image: nginx:1.23.1-alpine
+    container_name: webserver
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - wordpress_domain2:/var/www/html/domain2
+      - wordpress_domain1:/var/www/html/domain1
+      - ./nginx-conf:/etc/nginx/conf.d
+      - ./certbot-etc:/etc/letsencrypt
+    networks:
+      - app-network
+
+volumes:
+  wordpress_domain2:
+  wordpress_domain1:
+  dbdata:
+
+networks:
+  app-network:
+    driver: bridge  
