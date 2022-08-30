@@ -18,7 +18,7 @@ https://www.digitalocean.com/community/tutorials/how-to-set-up-multiple-wordpres
 
 3. Single WordPress docker with multisites
 similar to option 1. 
-<img src="illustrations/multiple-wordpress-sites-3.PNG" width="720" />
+<img src="illustrations/multiple-wordpress-sites-3.png" width="720" />
 https://bobcares.com/blog/docker-wordpress-multisite/
 
 4. Multiple WordPress Docker Containers
