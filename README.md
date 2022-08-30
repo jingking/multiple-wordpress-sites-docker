@@ -4,11 +4,12 @@ This is a side project that explores the options to host multiple WordPress site
 
 This doc is a brief summary of the major steps to set up multiple WordPress sites with docker. The architecture is shown below:
 
-![](illustrations/multiple-wordpress-sites-3.2.PNG)
+<img src="illustrations/multiple-wordpress-sites-3.2.PNG" width="800" />
+
 For single site docker deployment, see
 https://www.digitalocean.com/community/tutorials/how-to-install-wordpress-with-docker-compose
 For overview of other Multiple WordPress sites deployment options, see notes here,  
-https://github.com/jingking/multiple-wordpress-sites-docker/main/Deployment Options for Multiple WordPress Sites.md
+https://github.com/jingking/multiple-wordpress-sites-docker#deployment%20options%20for%20multiple%20wordpress%20sites.md
 
 ## Installation
 - Step 1<br>
