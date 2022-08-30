@@ -9,7 +9,7 @@ This doc is a brief summary of the major steps to set up multiple WordPress site
 For single site docker deployment, see
 https://www.digitalocean.com/community/tutorials/how-to-install-wordpress-with-docker-compose
 For overview of other Multiple WordPress sites deployment options, see notes here,  
-https://github.com/jingking/multiple-wordpress-sites-docker#deployment%20options%20for%20multiple%20wordpress%20sites.md
+https://github.com/jingking/multiple-wordpress-sites-docker/blob/main/deployment%20options%20for%20multiple%20wordpress%20sites.md
 
 ## Installation
 - Step 1<br>
