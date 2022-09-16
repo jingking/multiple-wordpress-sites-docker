@@ -37,4 +37,4 @@ Update the Nginx configuration file (add https) and restart webserver<br>
     docker compose up -d --force-recreate --no-deps webserver
 ````
 - Step 6<br> 
-Complet the WordPress sites installation via the browser<br>
+Complete the WordPress sites installation via the browser<br>
